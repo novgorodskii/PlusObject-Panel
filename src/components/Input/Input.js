@@ -4,9 +4,9 @@ import RoomIcon from '@material-ui/icons/Room';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './Input.sass';
 
-const Input = ({placeholder, type}) => {
+const Input = ({placeholder, type, chnageValue, valueInput}) => {
 
-  const [value, setValue] = useState('');
+  const [value , setValue] = useState('');
 
   const propsSwith = () => {
     switch (type) {
@@ -20,6 +20,12 @@ const Input = ({placeholder, type}) => {
           placeholder="Password"
           onChange={(e) => setValue(e.target.value)}/>
       </div>
+
+      case "number":
+      return  <div className="input" >
+                <input value={valueInput} onChange={(e) => { chnageValue(e.target.value)}}
+                  placeholder={placeholder} type="number" />
+              </div>
 
       case "icon":
         return <div className="input input-icon" >
@@ -35,7 +41,12 @@ const Input = ({placeholder, type}) => {
         </div>
 
       default:
-      return <div className="input" ><input placeholder={placeholder} type="text" /></div>;
+      return (
+        <div className="input" >
+          <input value={valueInput} onChange={(e) => { chnageValue(e.target.value)}}
+            placeholder={placeholder} type="text" />
+        </div>
+      )
     }
   };
   return (

@@ -6,7 +6,7 @@ import Select from '../Select';
 
 import './Form.sass';
 
-const Form = () => {
+const Form = ({sortNumber}) => {
 
   const [ typesExpenses, setTypesExpenses ] = useState([]);
   const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип'});
@@ -14,16 +14,29 @@ const Form = () => {
   const [ typesProduct, setTypesProduct ] = useState([]);
   const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
 
+  const [ valueNumber, setNumber ] = useState('');
+
   useEffect(() => {
     const api = new ApiExpenses();
     api.getTypesExpenses().then(data => setTypesExpenses(data));
     api.getTypesProduct().then(data => setTypesProduct(data));
   }, []);
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
+
+  const chnageValue = (value) => {
+    setNumber(value);
+    sortNumber(value);
+  };
+
   return (
-    <form className="form row">
+    <form className="form row" onSubmit={handleSubmit}>
       <div className="form-number col-2">
-        <Input placeholder="Введите номер" />
+        <Input type="number" placeholder="Введите номер"
+          valueInput={valueNumber}
+          chnageValue={chnageValue} />
       </div>
 
       <div className="form-name col-4">
