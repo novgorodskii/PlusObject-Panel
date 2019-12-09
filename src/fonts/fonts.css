@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'Proba Pro Thin';
+  src: url('./Proba-Pro-Thin.woff') format('woff'),
+      url('./Proba-Pro-Thin.ttf') format('truetype'),
+      url('./Proba-Pro-Thin.otf') format('otf');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proba Pro Light';
+  src: url('./Mint-Type-Proba-Pro-Light.woff') format('woff'),
+      url('./Mint-Type-Proba-Pro-Light.ttf') format('truetype'),
+      url('./Mint-Type-Proba-Pro-Light.otf') format('otf');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proba Pro';
+  src: url('./Mint-Type-Proba-Pro-Regular.woff') format('woff'),
+      url('./Mint-Type-Proba-Pro-Regular.ttf') format('truetype'),
+      url('./Mint-Type-Proba-Pro-Regular.otf') format('otf');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proba Pro Medium';
+  src: url('./Proba-Pro-Medium.woff') format('woff'),
+      url('./Proba-Pro-Medium.ttf') format('truetype'),
+      url('./Proba-Pro-Medium.otf') format('otf');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proba Pro SemiBold';
+  src: url('./Proba-Pro-SemiBold.woff') format('woff'),
+      url('./Proba-Pro-SemiBold.ttf') format('truetype'),
+      url('./Proba-Pro-SemiBold.otf') format('otf');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proba Pro Bold';
+  src: url('./Mint-Type-Proba-Pro-Bold.woff') format('woff'),
+      url('./Mint-Type-Proba-Pro-Bold.ttf') format('truetype'),
+      url('./Mint-Type-Proba-Pro-Bold.otf') format('otf');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
