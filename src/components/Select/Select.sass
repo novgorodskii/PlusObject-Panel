@@ -1,0 +1,32 @@
+.select
+  font-size: 15px;
+  color: #3F3356;
+  position: relative;
+  &-active
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 240px;
+    height: 48px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 16px;
+    cursor: pointer;
+    &-item
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  &-list
+    position: absolute;
+    top: 56px;
+    width: 240px;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #D0C9D6;
+    div
+      transition: all .3s;
+      padding: 8px 0;
+    div:hover
+      color: #3F3356;

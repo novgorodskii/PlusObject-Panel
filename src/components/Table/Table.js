@@ -1,12 +1,16 @@
 import React from 'react';
 
+import Form from '../Form';
 import './Table.sass';
 
 const Table = () => {
 
   return (
-    <div className="table shadow-box">
-      Table
+    <div className="table">
+      <Form />
+      <div className="table-content shadow-box">
+
+      </div>
     </div>
   );
 };
