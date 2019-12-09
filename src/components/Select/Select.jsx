@@ -22,8 +22,8 @@ const Select = ({ activeItem, itemsList, onClick, iconLeft = false }) => {
       {
         show ?
         <div className="select-list shadow-box">
-          { itemsList.map(item => <div onClick={() => {
-            onClick(item.id);
+          { itemsList.map((item, id) => <div onClick={() => {
+            onClick(id);
             toggleShow(!show);
           }} key={ item.id }>{ item.name }</div>) }
         </div> : null
