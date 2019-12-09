@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ApiExpenses from '../../service/apiResource';
 import Input from '../Input';
@@ -8,26 +8,37 @@ import './Form.sass';
 
 const Form = () => {
 
-  const [ types, setTypes ] = useState([]);
-  const [ activeType, setActiveTypes ] = useState('Выберите тип');
+  const [ typesExpenses, setTypesExpenses ] = useState([]);
+  const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип'});
 
-  const api = new ApiExpenses();
+  const [ typesProduct, setTypesProduct ] = useState([]);
+  const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
 
-  api.getTypesExpenses()
-    .then(data => setTypes(data));
+  useEffect(() => {
+    const api = new ApiExpenses();
+    api.getTypesExpenses().then(data => setTypesExpenses(data));
+    api.getTypesProduct().then(data => setTypesProduct(data));
+  }, []);
 
   return (
-    <form className="form">
-      <div className="form-number">
+    <form className="form row">
+      <div className="form-number col-2">
         <Input placeholder="Введите номер" />
       </div>
 
-      <div className="form-name">
+      <div className="form-name col-4">
         <Input placeholder="Введите название" />
       </div>
 
-      <div className="form-select-type">
-        <Select onClick={(id) => setActiveTypes(types[id])} itemsList={types} activeItem={activeType} />
+      <div className="form-product col-3">
+        <Select
+          onClick={(id) => setActiveTypesExpense(typesExpenses[id])}
+          itemsList={typesExpenses} activeItem={activeTypeExpenses} />
+      </div>
+
+      <div className="form-expensise col-3">
+        <Select onClick={(id) => setActiveProduct(typesProduct[id])}
+          itemsList={typesProduct} activeItem={activeTypeProduct} />
       </div>
     </form>
   );

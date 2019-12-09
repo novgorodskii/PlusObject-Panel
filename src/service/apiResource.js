@@ -15,7 +15,10 @@ export default class ApiExpenses {
   getTypesExpenses = () => {
     return this.getResourse('expenses/types')
   };
+  getTypesProduct = () => {
+    return this.getResourse('product/types')
+  };
+  getExpenses = () => {
+    return this.getResourse('expenses');
+  };
 };
-
-const api = new ApiExpenses();
-api.getTypesExpenses().then(data => console.log(data));

@@ -6,12 +6,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-width: 240px;
     height: 48px;
     background-color: #fff;
     border-radius: 6px;
     padding: 16px;
     cursor: pointer;
+    white-space: nowrap;
     &-item
       display: flex;
       justify-content: space-between;
@@ -19,12 +19,13 @@
   &-list
     position: absolute;
     top: 56px;
-    width: 240px;
+    width: 100%;
     background-color: #fff;
     border-radius: 6px;
     padding: 8px 16px;
     cursor: pointer;
     color: #D0C9D6;
+    z-index: 1;
     div
       transition: all .3s;
       padding: 8px 0;
