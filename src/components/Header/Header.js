@@ -5,7 +5,7 @@ import "./Header.sass";
 
 const Header = () => {
   return (
-    <header className="header shadow-box ">
+    <header className="header shadow-box">
       <Logo />
     </header>
   );

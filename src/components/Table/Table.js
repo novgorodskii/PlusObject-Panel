@@ -5,7 +5,7 @@ import './Table.sass';
 const Table = () => {
 
   return (
-    <div className="table">
+    <div className="table shadow-box">
       Table
     </div>
   );
