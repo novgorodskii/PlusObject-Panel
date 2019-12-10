@@ -8,13 +8,13 @@ const TableHeader = () => {
       <div className="col-2 title text-center">
         #
       </div>
-      <div className="col-4 title">
+      <div className="col-5 title">
         Наименование
       </div>
-      <div className="col-3 title">
+      <div className="col-2 title">
         Вид товаров
       </div>
-      <div className="col-3 title">
+      <div className="col-2 title">
         Тип расходов
       </div>
     </div>

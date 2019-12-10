@@ -3,24 +3,29 @@ import React, { useEffect, useState } from 'react';
 import ApiExpenses from '../../service/apiResource';
 import Form from '../Form';
 import TableHeader from '../TableHeader';
-
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './Table.sass';
 
 const Table = () => {
 
   const [ expensesList, setExp ] = useState([]);
 
-  const [ typesProduct, setTypeProduct ] = useState([]);
+  const [ typesProduct, setTypesProduct ] = useState([]);
   const [ typesExp, setTypeExp ] = useState([]);
   const [ valueNumber, setNumber ] = useState('');
   const [ valueName, setName ] = useState('');
+  const [ activeIdProduct, setactiveIdProduct ] = useState();
+  const [ activeIdExp, setactiveIdExp ] = useState();
 
   useEffect(() => {
+
     const api = new ApiExpenses();
-    api.getExpenses().then(data => setExp(filterName(filterNumber(data, valueNumber), valueName)));
-    api.getTypesProduct().then(data => setTypeProduct(data));
-    api.getTypesExpenses().then(data => setTypeExp(data));
-  }, [valueName, valueNumber]);
+    api.getExpenses(valueNumber, valueName, activeIdProduct, activeIdExp).then(data => {
+      setExp(data);
+    });
+    api.getTypesProduct().then(data => setTypesProduct([...data, {name:'Не выбрано', id: ''}]));
+    api.getTypesExpenses().then(data => setTypeExp([...data, {name:'Не выбрано', id: ''}]));
+  }, [valueName, valueNumber, activeIdProduct, activeIdExp]);
 
   const changeValueNumber = (value) => {
     setNumber(value);
@@ -30,45 +35,47 @@ const Table = () => {
     setName(value);
   };
 
-  const filterName = (items, term, ) => {
-    if (term.length === 0) return items;
-    return items.filter((item) => {
-      return item.title.toLowerCase().indexOf(term.toLowerCase()) > - 1;
-    });
-  };
-
-  const filterNumber = (items, term) => {
-    if (term.length === 0) return items;
-    return items.filter(item => {
-
-      return String(item.number).indexOf(term) > - 1;
-    });
-  };
 
   const expListItem = expensesList.map(item => {
     let typeProduct = typesProduct.find(element => element.id === item.kind);
-    let typeExp = typesProduct.find(element => element.id === item.type);
+
+    let typeExp = typesExp.find(element => element.id === item.type);
     return (
       <div className="expenses row" key={item.id}>
         <div className="col-2 expenses-item text-center">
           {item.number}
         </div>
-        <div className="col-4 expenses-item ">
+        <div className="col-5 expenses-item ">
           {item.title}
         </div>
-        <div className="col-3 expenses-item ">
+        <div className="col-2 expenses-item ">
           {typeProduct ? typeProduct.name : "----"}
         </div>
-        <div className="col-3 expenses-item ">
+        <div className="col-2 expenses-item ">
           {typeExp ? typeExp.name : "----"}
+        </div>
+
+        <div className="col-1 expenses-item text-center">
+          <div className="shadow-box">
+            <DeleteForeverIcon />
+          </div>
         </div>
       </div>
     );
   });
 
+  const handleIdProduct = (id) => {
+    setactiveIdProduct(id);
+  };
+  const handleIdExp = (id) => {
+    setactiveIdExp(id);
+  };
+
   return (
     <div className="table">
       <Form
+        setactiveIdProduct={handleIdProduct}
+        setactiveIdExpense={handleIdExp}
         typesProduct={typesProduct}
         typesExp={typesExp}
         data={[valueName, valueNumber, changeValueName, changeValueNumber]} />

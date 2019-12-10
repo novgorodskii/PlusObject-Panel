@@ -5,11 +5,10 @@ import Select from '../Select';
 
 import './Form.sass';
 
-const Form = ({sortNumber, typesExp, typesProduct, data}) => {
+const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExpense} ) => {
 
-  const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип'});
-
-  const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
+  const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите вид товара'});
+  const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип расхода'});
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -19,26 +18,34 @@ const Form = ({sortNumber, typesExp, typesProduct, data}) => {
 
   return (
     <form className="form row" onSubmit={handleSubmit}>
+
       <div className="form-number col-2">
         <Input type="number" placeholder="Введите номер"
           valueInput={valueNumber}
           changeValue={changeValueNumber} />
       </div>
 
-      <div className="form-name col-4">
+      <div className="form-name col-5">
         <Input placeholder="Введите название" valueInput={valueName} changeValue={changeValueName} />
+      </div>
+
+      <div className="form-expensise col-2">
+        <Select onClick={(id, idItem) => {
+          setActiveProduct(typesProduct[id]);
+          setactiveIdProduct(idItem);
+        }}
+          itemsList={typesProduct} activeItem={activeTypeProduct} />
       </div>
 
       <div className="form-product col-3">
         <Select
-          onClick={(id) => setActiveTypesExpense(typesExp[id])}
+          onClick={(id, idItem) => {
+            setActiveTypesExpense(typesExp[id]);
+            setactiveIdExpense(idItem);
+          }}
           itemsList={typesExp} activeItem={activeTypeExpenses} />
       </div>
 
-      <div className="form-expensise col-3">
-        <Select onClick={(id) => setActiveProduct(typesProduct[id])}
-          itemsList={typesProduct} activeItem={activeTypeProduct} />
-      </div>
     </form>
   );
 };

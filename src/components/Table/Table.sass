@@ -10,5 +10,27 @@
         padding: 17px 34px;
   .expenses
     font-size: 14px;
+    transition: all .3s;
     &-item
+      display: flex;
+      align-items: center;
       padding: 17px 34px;
+      white-space: nowrap;
+    &-item:last-child
+      div
+        color: #3F3356;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: #fff;
+        border-radius: 6px;
+        transition: all .3s;
+        &:active, &:hover
+          color: red;
+    &-item:first-child
+      justify-content: center;
+    &:hover
+      color: #6979F8;
+      cursor: pointer;

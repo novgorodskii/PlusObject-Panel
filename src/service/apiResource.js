@@ -1,9 +1,7 @@
 export default class ApiExpenses {
-
+  _apiBase = `http://api.plusobject.com/api/`;
   async getResourse(url) {
-    const _apiBase = `http://api.plusobject.com/api/`;
-
-    const res = await fetch(`${_apiBase}${url}`);
+    const res = await fetch(`${this._apiBase}${url}`);
 
     if(!res.ok) {
       throw new Error(`Could not fetch ${url}` +
@@ -11,14 +9,14 @@ export default class ApiExpenses {
     }
     return await res.json();
   };
-
   getTypesExpenses = () => {
     return this.getResourse('expenses/types')
   };
   getTypesProduct = () => {
     return this.getResourse('product/types')
   };
-  getExpenses = () => {
-    return this.getResourse('expenses');
+  getExpenses = (number = '', title = '', kind = '', type = '') => {
+    return this
+      .getResourse(`expenses/?ExpensesSearch[number]=${number}&ExpensesSearch[title]=${title}&ExpensesSearch[kind]=${kind}&ExpensesSearch[type]=${type}`);
   };
 };
