@@ -4,7 +4,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './Input.sass';
 
-const Input = ({placeholder, type, chnageValue, valueInput}) => {
+const Input = ({placeholder, type, changeValue, valueInput}) => {
 
   const [value , setValue] = useState('');
 
@@ -23,7 +23,7 @@ const Input = ({placeholder, type, chnageValue, valueInput}) => {
 
       case "number":
       return  <div className="input" >
-                <input value={valueInput} onChange={(e) => { chnageValue(e.target.value)}}
+                <input value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
                   placeholder={placeholder} type="number" />
               </div>
 
@@ -43,7 +43,7 @@ const Input = ({placeholder, type, chnageValue, valueInput}) => {
       default:
       return (
         <div className="input" >
-          <input value={valueInput} onChange={(e) => { chnageValue(e.target.value)}}
+          <input value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
             placeholder={placeholder} type="text" />
         </div>
       )

@@ -15,6 +15,7 @@ const Form = ({sortNumber}) => {
   const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
 
   const [ valueNumber, setNumber ] = useState('');
+  const [ valueName, setName ] = useState('');
 
   useEffect(() => {
     const api = new ApiExpenses();
@@ -26,9 +27,13 @@ const Form = ({sortNumber}) => {
     evt.preventDefault();
   };
 
-  const chnageValue = (value) => {
+  const changeValueNumber = (value) => {
     setNumber(value);
     sortNumber(value);
+  };
+
+  const changeValueName = (value) => {
+    setName(value);
   };
 
   return (
@@ -36,11 +41,11 @@ const Form = ({sortNumber}) => {
       <div className="form-number col-2">
         <Input type="number" placeholder="Введите номер"
           valueInput={valueNumber}
-          chnageValue={chnageValue} />
+          changeValue={changeValueNumber} />
       </div>
 
       <div className="form-name col-4">
-        <Input placeholder="Введите название" />
+        <Input placeholder="Введите название" valueInput={valueName} changeValue={changeValueName} />
       </div>
 
       <div className="form-product col-3">
