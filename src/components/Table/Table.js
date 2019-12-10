@@ -26,6 +26,10 @@ const Table = () => {
   };
 
   const expListItem = expensesList.map(item => {
+    let typeProduct = typesProduct.find(element => element.id === item.kind);
+    let typeExp = typesProduct.find(element => element.id === item.type);
+
+    console.log(typeProduct);
     return (
       <div className="expenses row" key={item.id}>
         <div className="col-2 expenses-item text-center">
@@ -35,10 +39,10 @@ const Table = () => {
           {item.title}
         </div>
         <div className="col-3 expenses-item ">
-          Панели
+          {typeProduct ? typeProduct.name : "----"}
         </div>
         <div className="col-3 expenses-item ">
-          Транспортные расходы
+          {typeExp ? typeExp.name : "----"}
         </div>
       </div>
     )
