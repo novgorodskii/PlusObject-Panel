@@ -9,10 +9,15 @@ import './Table.sass';
 const Table = () => {
 
   const [ expensesList, setExp ] = useState([]);
+  const [ typesProduct, setTypeProduct ] = useState([]);
+  const [ typesExp, setTypeExp ] = useState([]);
+
 
   useEffect(() => {
     const api = new ApiExpenses();
     api.getExpenses().then(data => setExp(data));
+    api.getTypesProduct().then(data => setTypeProduct(data));
+    api.getTypesExpenses().then(data => setTypeExp(data));
   }, []);
 
   const sortNumber = (number) => {
@@ -41,7 +46,7 @@ const Table = () => {
 
   return (
     <div className="table">
-      <Form sortNumber={sortNumber} />
+      <Form sortNumber={sortNumber} typesProduct={typesProduct} typesExp={typesExp} />
       <div className="table-content shadow-box">
         <TableHeader />
         {expListItem}

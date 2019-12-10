@@ -6,22 +6,14 @@ import Select from '../Select';
 
 import './Form.sass';
 
-const Form = ({sortNumber}) => {
+const Form = ({sortNumber, typesExp, typesProduct}) => {
 
-  const [ typesExpenses, setTypesExpenses ] = useState([]);
   const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип'});
 
-  const [ typesProduct, setTypesProduct ] = useState([]);
   const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
 
   const [ valueNumber, setNumber ] = useState('');
   const [ valueName, setName ] = useState('');
-
-  useEffect(() => {
-    const api = new ApiExpenses();
-    api.getTypesExpenses().then(data => setTypesExpenses(data));
-    api.getTypesProduct().then(data => setTypesProduct(data));
-  }, []);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -50,8 +42,8 @@ const Form = ({sortNumber}) => {
 
       <div className="form-product col-3">
         <Select
-          onClick={(id) => setActiveTypesExpense(typesExpenses[id])}
-          itemsList={typesExpenses} activeItem={activeTypeExpenses} />
+          onClick={(id) => setActiveTypesExpense(typesExp[id])}
+          itemsList={typesExp} activeItem={activeTypeExpenses} />
       </div>
 
       <div className="form-expensise col-3">
