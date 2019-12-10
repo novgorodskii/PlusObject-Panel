@@ -1,32 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import ApiExpenses from '../../service/apiResource';
 import Input from '../Input';
 import Select from '../Select';
 
 import './Form.sass';
 
-const Form = ({sortNumber, typesExp, typesProduct}) => {
+const Form = ({sortNumber, typesExp, typesProduct, data}) => {
 
   const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип'});
 
   const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите тип'});
 
-  const [ valueNumber, setNumber ] = useState('');
-  const [ valueName, setName ] = useState('');
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
   };
 
-  const changeValueNumber = (value) => {
-    setNumber(value);
-    sortNumber(value);
-  };
-
-  const changeValueName = (value) => {
-    setName(value);
-  };
+  const [valueName, valueNumber, changeValueName, changeValueNumber] = data;
 
   return (
     <form className="form row" onSubmit={handleSubmit}>

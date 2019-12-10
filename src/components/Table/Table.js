@@ -9,27 +9,45 @@ import './Table.sass';
 const Table = () => {
 
   const [ expensesList, setExp ] = useState([]);
+
   const [ typesProduct, setTypeProduct ] = useState([]);
   const [ typesExp, setTypeExp ] = useState([]);
-
+  const [ valueNumber, setNumber ] = useState('');
+  const [ valueName, setName ] = useState('');
 
   useEffect(() => {
     const api = new ApiExpenses();
-    api.getExpenses().then(data => setExp(data));
+    api.getExpenses().then(data => setExp(filterName(filterNumber(data, valueNumber), valueName)));
     api.getTypesProduct().then(data => setTypeProduct(data));
     api.getTypesExpenses().then(data => setTypeExp(data));
-  }, []);
+  }, [valueName, valueNumber]);
 
-  const sortNumber = (number) => {
-    const arr = expensesList.filter(item => Number(String(item.id)[0]) === Number(number));
-    if( expensesList.length !== 0) setExp(arr);
+  const changeValueNumber = (value) => {
+    setNumber(value);
+  };
+
+  const changeValueName = (value) => {
+    setName(value);
+  };
+
+  const filterName = (items, term, ) => {
+    if (term.length === 0) return items;
+    return items.filter((item) => {
+      return item.title.toLowerCase().indexOf(term.toLowerCase()) > - 1;
+    });
+  };
+
+  const filterNumber = (items, term) => {
+    if (term.length === 0) return items;
+    return items.filter(item => {
+
+      return String(item.number).indexOf(term) > - 1;
+    });
   };
 
   const expListItem = expensesList.map(item => {
     let typeProduct = typesProduct.find(element => element.id === item.kind);
     let typeExp = typesProduct.find(element => element.id === item.type);
-
-    console.log(typeProduct);
     return (
       <div className="expenses row" key={item.id}>
         <div className="col-2 expenses-item text-center">
@@ -45,12 +63,15 @@ const Table = () => {
           {typeExp ? typeExp.name : "----"}
         </div>
       </div>
-    )
+    );
   });
 
   return (
     <div className="table">
-      <Form sortNumber={sortNumber} typesProduct={typesProduct} typesExp={typesExp} />
+      <Form
+        typesProduct={typesProduct}
+        typesExp={typesExp}
+        data={[valueName, valueNumber, changeValueName, changeValueNumber]} />
       <div className="table-content shadow-box">
         <TableHeader />
         {expListItem}
@@ -115,34 +136,6 @@ export default Table;
 //     });
 //   };
 
-//   toggleProperty(arr, id, propName) {
-//     const idx = arr.findIndex((el) => el.id === id);
-//     const oldItem = arr[idx];
-//     const newItem = { ...oldItem,
-//        [ propName ]: !oldItem[propName] };
-
-//     return [
-//       ...arr.slice(0, idx),
-//       newItem,
-//       ...arr.slice(idx + 1)
-//     ];
-//   };
-
-//   onToggleDone = (id) => {
-//     this.setState(({ todoData }) => {
-//       return {
-//         todoData: this.toggleProperty(todoData, id, 'done')
-//       };
-//     });
-//   };
-
-//   onToggleImportant = (id) => {
-//     this.setState(({ todoData }) => {
-//       return {
-//         todoData: this.toggleProperty(todoData, id, 'important')
-//       };
-//     });
-//   };
 
 //   search(items, term) {
 //     if (term.length === 0) {
