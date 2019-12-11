@@ -3,6 +3,11 @@ import React, { useEffect, useState } from 'react';
 import ApiExpenses from '../../service/apiResource';
 import Form from '../Form';
 import TableHeader from '../TableHeader';
+import ModalWindow from '../ModalWindow';
+import FormAdd from '../FormAdd';
+import FormEdit from '../FormEdit';
+
+
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './Table.sass';
 
@@ -16,6 +21,9 @@ const Table = () => {
   const [ valueName, setName ] = useState('');
   const [ activeIdProduct, setactiveIdProduct ] = useState();
   const [ activeIdExp, setactiveIdExp ] = useState();
+  const [ activeAdd, setActiveAdd ] = useState(false);
+  const [ activeEdit, setActiveEdit ] = useState(false);
+  const [ itemEdit, setItemEdit] = useState('');
 
   useEffect(() => {
     const api = new ApiExpenses();
@@ -43,6 +51,14 @@ const Table = () => {
       });
   };
 
+  const closeAdd = () => setActiveAdd(false);
+  const open = () => setActiveAdd(true);
+
+  const closeEdit = () => setActiveEdit(false);
+  const openEdit = (item) => {
+    setItemEdit(item);
+    setActiveEdit(true);
+  };
 
   const expListItem = expensesList.map(item => {
     let typeProduct = typesProduct.find(element => element.id === item.kind);
@@ -53,7 +69,7 @@ const Table = () => {
         <div className="col-2 expenses-item text-center">
           {item.number}
         </div>
-        <div className="col-5 expenses-item ">
+        <div onClick={() => openEdit(item)} className="col-5 expenses-item ">
           {item.title}
         </div>
         <div className="col-2 expenses-item ">
@@ -81,9 +97,33 @@ const Table = () => {
     setactiveIdExp(id);
   };
 
+  const newAddList = (arr) => setExp(arr);
+
   return (
     <div className="table">
+      <h1>Расходы</h1>
+
+      {activeAdd ?
+        <ModalWindow close={closeAdd}>
+          <FormAdd
+            newAddList={newAddList}
+            close={closeAdd}
+            typesProduct={typesProduct}
+            typesExp={typesExp} />
+        </ModalWindow> : null}
+
+      {activeEdit ?
+      <ModalWindow close={closeEdit}>
+        <FormEdit
+          item={itemEdit}
+          newAddList={newAddList}
+          close={closeEdit}
+          typesProduct={typesProduct}
+          typesExp={typesExp} />
+      </ModalWindow> : null}
+
       <Form
+        open={open}
         setactiveIdProduct={handleIdProduct}
         setactiveIdExpense={handleIdExp}
         typesProduct={typesProduct}
@@ -98,117 +138,3 @@ const Table = () => {
 };
 
 export default Table;
-
-
-// export default class App extends Component {
-
-//   maxId = 100;
-//   state = {
-//     todoData: [
-//       this.createTodoItem('Drink Coffee'),
-//       this.createTodoItem('Make Awesome App'),
-//       this.createTodoItem('Have a lunch')
-//     ],
-//     term: '',
-//     filter: 'all'
-//   };
-
-//   createTodoItem(label) {
-//     return {
-//       label,
-//       done: false,
-//       important: false,
-//       id: this.maxId++
-//     }
-//   }
-
-//   deleteItem = (id) => {
-
-//     this.setState(({ todoData }) => {
-
-//       const idx = todoData.findIndex((el) => el.id === id);
-//       const newArray = [
-//             ...todoData.slice(0, idx),
-//             ...todoData.slice(idx + 1)
-//       ];
-
-//       return {
-//         todoData: newArray
-//       };
-//     });
-//   };
-
-//   addItem = (text) => {
-//     const newItem = this.createTodoItem(text);
-
-//     this.setState(({ todoData }) => {
-//       const newArray = [
-//         ...todoData,
-//         newItem
-//       ];
-
-//       return {
-//         todoData: newArray
-//       }
-//     });
-//   };
-
-
-//   search(items, term) {
-//     if (term.length === 0) {
-//       return items;
-//     };
-
-//     return items.filter((item) => {
-//       return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
-//     })
-//   }
-
-//   onSearchChange = (term) => {
-//     this.setState({ term });
-//   };
-
-//   filter(items, filter) {
-//     switch(filter) {
-//       case 'all':
-//         return items;
-//       case 'active':
-//         return items.filter((item) => !item.done);
-//       case 'done':
-//         return items.filter((item) => item.done);
-//       default:
-//         return items;
-//     }
-//   };
-
-//   onFilterChange = (filter) => {
-//     this.setState({ filter });
-//   };
-
-//   render() {
-//     const { todoData, term, filter } = this.state;
-//     const visibleItems = this.filter(this.search(todoData, term), filter);
-//     const doneCount = todoData.filter((el) => el.done).length;
-//     const todoCount = todoData.length - doneCount;
-
-//     return (
-//       <div className="todo-app">
-//         <AppHeader toDo={todoCount} done={doneCount} />
-//         <div className="top-panel d-flex">
-//           <SearchPanel
-//           onSearchChange={this.onSearchChange} />
-//           <ItemStatusFilter
-//           filter={filter}
-//           onFilterChange={this.onFilterChange} />
-//         </div>
-//         <TodoList
-//           todos={visibleItems}
-//           onDeleted={ this.deleteItem }
-//           onToggleImportant={ this.onToggleImportant}
-//           onToggleDone={ this.onToggleDone } />
-//         <ItemAddForm onItemAdded={ this.addItem } />
-//       </div>
-//     );
-//   }
-
-// };

@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import Input from '../Input';
 import Select from '../Select';
+import Button from '../Button';
 
 import './Form.sass';
 
-const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExpense} ) => {
+const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExpense, open} ) => {
 
   const [ activeTypeProduct, setActiveProduct ] = useState({name:'Выберите вид товара'});
   const [ activeTypeExpenses, setActiveTypesExpense ] = useState({name:'Выберите тип расхода'});
@@ -37,7 +38,7 @@ const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExp
           itemsList={typesProduct} activeItem={activeTypeProduct} />
       </div>
 
-      <div className="form-product col-3">
+      <div className="form-product col-2">
         <Select
           onClick={(id, idItem) => {
             setActiveTypesExpense(typesExp[id]);
@@ -46,6 +47,9 @@ const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExp
           itemsList={typesExp} activeItem={activeTypeExpenses} />
       </div>
 
+      <div className="col-1">
+          <Button text="+" onClick={() => open()} />
+      </div>
     </form>
   );
 };

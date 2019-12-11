@@ -4,7 +4,7 @@ import RoomIcon from '@material-ui/icons/Room';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './Input.sass';
 
-const Input = ({placeholder, type, changeValue, valueInput}) => {
+const Input = ({placeholder, type, changeValue, valueInput, defaultValue}) => {
 
   const [value , setValue] = useState('');
 
@@ -16,6 +16,7 @@ const Input = ({placeholder, type, changeValue, valueInput}) => {
           <VisibilityIcon fontSize="small"/>
         </div>
         <input
+          defaultValue={defaultValue}
           type="password"
           placeholder="Password"
           onChange={(e) => setValue(e.target.value)}/>
@@ -23,7 +24,7 @@ const Input = ({placeholder, type, changeValue, valueInput}) => {
 
       case "number":
       return  <div className="input" >
-                <input value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
+                <input defaultValue={defaultValue} value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
                   placeholder={placeholder} type="number" />
               </div>
 
@@ -35,6 +36,7 @@ const Input = ({placeholder, type, changeValue, valueInput}) => {
               <RoomIcon fontSize="small" />
             </div>
           <input
+            defaultValue={defaultValue}
             onChange={(e) => setValue(e.target.value)}
             placeholder={placeholder}
             type="text"></input>
@@ -43,7 +45,7 @@ const Input = ({placeholder, type, changeValue, valueInput}) => {
       default:
       return (
         <div className="input" >
-          <input value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
+          <input defaultValue={defaultValue} value={valueInput} onChange={(e) => { changeValue(e.target.value)}}
             placeholder={placeholder} type="text" />
         </div>
       )
