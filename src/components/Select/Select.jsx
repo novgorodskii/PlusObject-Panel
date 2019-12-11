@@ -5,9 +5,8 @@ import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
 import './Select.sass';
 
 const Select = ({ activeItem, itemsList, onClick, iconLeft = false }) => {
-
   const [ show, toggleShow ] = useState(false);
-  console.log(itemsList)
+
   return (
     <div className="select">
       <div className="select-active shadow-box"

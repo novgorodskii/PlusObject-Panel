@@ -18,7 +18,6 @@ const Table = () => {
   const [ activeIdExp, setactiveIdExp ] = useState();
 
   useEffect(() => {
-
     const api = new ApiExpenses();
     api.getExpenses(valueNumber, valueName, activeIdProduct, activeIdExp).then(data => {
       setExp(data);
@@ -33,6 +32,15 @@ const Table = () => {
 
   const changeValueName = (value) => {
     setName(value);
+  };
+
+  const deleteItem = (id) => {
+    const api = new ApiExpenses();
+    api.deleteExpenses(id)
+      .then(response => {
+        if( response === null) return ;
+        return setExp(response);
+      });
   };
 
 
@@ -55,7 +63,9 @@ const Table = () => {
           {typeExp ? typeExp.name : "----"}
         </div>
 
-        <div className="col-1 expenses-item text-center">
+        <div
+          onClick={() => deleteItem(item.id)}
+          className="col-1 expenses-item text-center">
           <div className="shadow-box">
             <DeleteForeverIcon />
           </div>
