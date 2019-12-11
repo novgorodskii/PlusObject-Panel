@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import RoomIcon from '@material-ui/icons/Room';
+import SearchIcon from '@material-ui/icons/Search';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import './Input.sass';
 
@@ -33,7 +33,7 @@ const Input = ({placeholder, type, changeValue, valueInput, defaultValue}) => {
           <div
             onChange={(e) => setValue(e.target.value)}
             className="iconInput" style={value !== '' ? {color: "#3F3356"} : { color: "#D0C9D6"}}>
-              <RoomIcon fontSize="small" />
+              <SearchIcon fontSize="small" />
             </div>
           <input
             defaultValue={defaultValue}

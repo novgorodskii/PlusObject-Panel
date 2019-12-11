@@ -1,5 +1,5 @@
 export default class ApiExpenses {
-  _apiBase = `http://api.plusobject.com/api/`;
+  _apiBase = `https://api.plusobject.com/api/`;
   async getResourse(url) {
     const res = await fetch(`${this._apiBase}${url}`);
 
