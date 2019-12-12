@@ -26,11 +26,11 @@ const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExp
           changeValue={changeValueNumber} />
       </div>
 
-      <div className="form-name col-5">
+      <div className="form-name col-xl-5 col-3">
         <Input placeholder="Введите название" valueInput={valueName} changeValue={changeValueName} />
       </div>
 
-      <div className="form-expensise col-2">
+      <div className="form-expensise col-xl-2 col-3">
         <Select onClick={(id, idItem) => {
           setActiveProduct(typesProduct[id]);
           setactiveIdProduct(idItem);
@@ -38,7 +38,7 @@ const Form = ( {typesExp, typesProduct, data, setactiveIdProduct, setactiveIdExp
           itemsList={typesProduct} activeItem={activeTypeProduct} />
       </div>
 
-      <div className="form-product col-2">
+      <div className="form-product col-xl-2 col-3">
         <Select
           onClick={(id, idItem) => {
             setActiveTypesExpense(typesExp[id]);

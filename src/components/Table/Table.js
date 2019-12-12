@@ -69,13 +69,13 @@ const Table = () => {
         <div className="col-2 expenses-item text-center">
           {item.number}
         </div>
-        <div onClick={() => openEdit(item)} className="col-5 expenses-item ">
+        <div onClick={() => openEdit(item)} className="col-3 col-xl-5 expenses-item ">
           {item.title}
         </div>
-        <div className="col-2 expenses-item ">
+        <div className="col-3 col-xl-2 expenses-item ">
           {typeProduct ? typeProduct.name : "----"}
         </div>
-        <div className="col-2 expenses-item ">
+        <div className="col-3 col-xl-2 expenses-item ">
           {typeExp ? typeExp.name : "----"}
         </div>
 
