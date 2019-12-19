@@ -90,5 +90,4 @@ export default class ApiExpenses {
 };
 
 // const api = new ApiExpenses;
-
 // api.deleteExpenses(66);
